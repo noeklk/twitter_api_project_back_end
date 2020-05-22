@@ -3,7 +3,7 @@ const jwtMiddleware = require("../middleware/jwtMiddleware");
 
 module.exports = (app) => {
     app.route("/users")
-        .get(jwtMiddleware.VerifyUserToken, userController.GetAllUsers);
+        .get(userController.GetAllUsers);
 
     app.route("/users/:id_user")
         .get(jwtMiddleware.VerifyUserToken, userController.GetAUserById)
