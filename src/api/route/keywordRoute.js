@@ -3,10 +3,18 @@ const jwtMiddleware = require("../middleware/jwtMiddleware");
 
 module.exports = (app) => {
 
-    app.route("/keyword/:id_user")
-        .get(jwtMiddleware.VerifyUserToken, keywordController.GetResultByKeywordAndIdUser)
-        .post(jwtMiddleware.VerifyUserToken, keywordController.CreateAKeywordByIdUser)
-        .put(jwtMiddlewagre.VerifyUserToken, keywordController.UpdateAKeywordByIdUser)
-        .delete(jwtMiddleware.VerifyUserToken, keywordController.DeleteAKeywordByIdUser);
+    app.route("/keyword/user/:id_user")
+        .post(jwtMiddleware.VerifyUserToken, keywordController.CreateKeywordByIdUser)
+
+    app.route("/keywords/user/:id_user")
+        .get(jwtMiddleware.VerifyUserToken, keywordController.GetAllByIdUser)
+
+    app.route("/keywords/:keyword/user/:id_user")
+        .get(jwtMiddleware.VerifyUserToken, keywordController.getMultiByIdUser)
+
+    app.route("/keyword/:keyword_id/")
+        .get(jwtMiddleware.VerifyUserToken, keywordController.GetAKeyword)
+        .put(jwtMiddlewagre.VerifyUserToken, keywordController.UpdateAKeyword)
+        .delete(jwtMiddleware.VerifyUserToken, keywordController.DeleteAKeyword);
     
 }
