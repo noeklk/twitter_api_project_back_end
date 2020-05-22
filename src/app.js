@@ -32,14 +32,8 @@ const tokenRoute = require("./api/route/tokenRoute");
 tokenRoute(app);
 
 // Importe la fonction anonyme dans la constante
-const noteRoute = require("./api/route/noteRoute");
-const moduleRoute = require("./api/route/moduleRoute");
-const sessionRoute = require("./api/route/sessionRoute");
 const userRoute = require("./api/route/userRoute");
 // Utilise la fonction anonyme contenu dans la constante
-noteRoute(app);
-moduleRoute(app);
-sessionRoute(app);
 userRoute(app);
 
 app.listen(port, hostname);

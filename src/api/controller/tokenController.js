@@ -3,10 +3,9 @@ const jwt = require("jsonwebtoken");
 const config = require("../../config");
 const { errorMessage } = config;
 
-const { ADMIN_JWT_KEY } = process.env;
-const { GUEST_JWT_KEY } = process.env;
+const { USER_JWT_KEY } = process.env;
 
-exports.CheckAdminOrGuestToken = (req, res) => {
+exports.CheckUserToken = (req, res) => {
     let token = req.headers.authorization ? req.headers.authorization : req.cookies.token;
 
     try {
@@ -15,22 +14,14 @@ exports.CheckAdminOrGuestToken = (req, res) => {
             res.json({ message: "Vous n'avez pas de token d'authentificaton" });
         }
         else {
-            jwt.verify(token, GUEST_JWT_KEY, (error, result) => {
+            jwt.verify(token, USER_JWT_KEY, (error, result) => {
                 if (!error && result) {
                     res.status(200);
                     res.json({ message: "Token valide" });
                 }
                 else {
-                    jwt.verify(token, ADMIN_JWT_KEY, (error, result) => {
-                        if (!error && result) {
-                            res.status(200);
-                            res.json({ message: "Token valide" });
-                        }
-                        else {
-                            res.status(403);
-                            res.json({ message: "Token non valide" });
-                        }
-                    })
+                    res.status(403);
+                    res.json({ message: "Token non valide" });
                 }
             });
         }

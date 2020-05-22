@@ -87,11 +87,11 @@ exports.UserRegister = (req, res) => {
             new_user.save((error, user) => {
                 if (!error && user) {
                     res.status(201);
-                    res.json({ message: "L'utilisateur a été corrèctement crée" });
+                    res.json({ message: "L'utilisateur a été corrèctement créé" });
                 } else {
                     res.status(400);
                     console.log(error);
-                    res.json({ message: "Une erreur s'est produite" });
+                    res.json({ message: errorMessage });
                 }
             });
         }
