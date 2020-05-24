@@ -1,5 +1,6 @@
 // const jwt = require("jsonwebtoken");
 const Keyword = require("../model/keywordModel");
+const User = require("../model/userModel");
 
 const config = require("../../config");
 const { errorMessage } = config;
@@ -7,12 +8,15 @@ const { errorMessage } = config;
 // Enregistre un keyword pour un user
 exports.CreateKeywordByIdUser = (req, res) => {
     try {
+        const id_user = req.params.id_user;
+
         let new_keyword = new Keyword({
             keyword : req.body.keyword,
-            tweets_number: req.body.tweets_number,
-            id_user : req.params.id_user
+            tweets_number : req.body.tweets_number,
+            id_user : id_user
         });
 
+        
         new_keyword.save((error, keyword) => {
             if (!error && keyword) {
                 res.status(201);
@@ -21,7 +25,7 @@ exports.CreateKeywordByIdUser = (req, res) => {
             } else {
                 res.status(400);
                 console.log(error);
-                res.json({ message: `Le mot ${new_keyword} existe déjà pour cet utilisateur.` });
+                res.json({ message: `Probleme dans la création du mot ${new_keyword} .` });
             }
         })
         
@@ -35,7 +39,7 @@ exports.CreateKeywordByIdUser = (req, res) => {
 // Récupère tous les keywords du user
 exports.GetAllKeywordsByIdUser = (req, res) => {
     try {
-        let id_user  = req.params.id_user;
+        const id_user  = req.params.id_user;
         Keyword.find({id_user}, (error, keywords) => {
             if (!error && keywords.length) {
                 res.status(200);
@@ -56,25 +60,32 @@ exports.GetAllKeywordsByIdUser = (req, res) => {
 }
 
 // Récupère un keyword d'un utilisateur
-exports.GetKeywoardByIdUser = (req, res) => {
+exports.GetKeywoardByIdUserAndIdKeyword = (req, res) => {
+    const { id_user } = req.params;
+    const { id_keyword } = req.params;
+  
     try {
-        let infos_keyword  = req.params;
         
-        Keyword.find({infos_keyword}, (error, keyword) => {
-            if (!error && keyword.length) {
-                res.status(200);
-                res.json(keyword);
-            }
-            else {
-                res.status(400);
-                console.log(error);
-                res.json({ message: "Aucun mot trouvé" });
-            }
-            
+        User.findOne({ _id : id_user }, (error, user) => {
+            if (!user) {
+                return res.status(400).json({ message: "L'utilisateur n'existe pas" });
+             } else {
+        
+                Keyword.findById(id_keyword, (error, keyword) => {
+                    if (!error) {
+                        res.status(200);
+                        res.json(keyword);
+                    }
+                    else {
+                        res.status(400);
+                        console.log(error);
+                        res.json({ message: "Aucun mot trouvé" });
+                    }
+                })
+              }
         })
-        
-        // res.json({infos_keyword});
-        
+
+                
     } catch (e) {
         res.status(500);
         console.log(e);
@@ -108,8 +119,8 @@ exports.GetAllKeywoards = (req, res) => {
 // Récupère un keyword de la BD par son id
 exports.GetAKeyword = (req, res) => {
     try {
-        let keyword_id  = req.params.keyword_id;
-        Keyword.findById(keyword_id, (error, keyword) => {
+        const id_keyword  = req.params.id_keyword;
+        Keyword.findById(id_keyword, (error, keyword) => {
             if (!error) {
                 res.status(200);
                 res.json(keyword);
@@ -133,9 +144,9 @@ exports.GetAKeyword = (req, res) => {
 // Mise a jour d'un keyword dans la BD par son id
 exports.UpdateAKeyword = (req, res) => {
     try {
-        let keyword_id  = req.params.keyword_id;
+        const id_keyword  = req.params.id_keyword;
         let updateK = req.body;
-        Keyword.findByIdAndUpdate(keyword_id , updateK, {new: true} , (error, keyword) => {
+        Keyword.findByIdAndUpdate(id_keyword , updateK, {new: true} , (error, keyword) => {
             if (!error) {
                 res.status(200);
                 res.json(keyword);
@@ -158,8 +169,8 @@ exports.UpdateAKeyword = (req, res) => {
 // Supprime un keyword dans la BD par son id
 exports.DeleteAKeyword = (req, res) => {
     try {
-        let keyword_id  = req.params.keyword_id;
-        Keyword.findByIdAndDelete(keyword_id , (error, keyword) => {
+        const id_keyword  = req.params.id_keyword;
+        Keyword.findByIdAndDelete(id_keyword , (error, keyword) => {
             if (!error) {
                 res.status(200);
                 res.json(keyword);
