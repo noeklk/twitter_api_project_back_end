@@ -109,8 +109,7 @@ exports.UserLogin = (req, res) => {
     try {
         const { pseudo } = req.body;
         const { password } = req.body;
-        const { ADMIN_JWT_KEY } = process.env;
-        const { GUEST_JWT_KEY } = process.env;
+        const { USER_JWT_KEY } = process.env;
 
         if (!pseudo) {
             return res.status(400).json({ message: "Veuillez renseigner un nom d'utilisateur" });
@@ -124,9 +123,8 @@ exports.UserLogin = (req, res) => {
                 else if (!bcrypt.compareSync(password, user.password)) {
                     return res.status(400).json({ message: "Le mot de passe est incorrect" });
                 } else {
-                    let jwtKey = user.role === "admin" ? ADMIN_JWT_KEY : GUEST_JWT_KEY;
 
-                    jwt.sign({ pseudo }, jwtKey, { expiresIn: "10m" }, (error, token) => {
+                    jwt.sign({ pseudo }, USER_JWT_KEY, { expiresIn: "10m" }, (error, token) => {
                         if (!error && token) {
                             res.status(200);
                             res.cookie("token", token, { maxAge: 600000, httpOnly: true });
