@@ -3,18 +3,20 @@ const jwtMiddleware = require("../middleware/jwtMiddleware");
 
 module.exports = (app) => {
 
-    app.route("/keyword/user/:id_user")
+    app.route("/users/:id_user/keyword/")
         .post(jwtMiddleware.VerifyUserToken, keywordController.CreateKeywordByIdUser)
 
-    app.route("/keywords/user/:id_user")
-        .get(jwtMiddleware.VerifyUserToken, keywordController.GetAllByIdUser)
+    app.route("/users/:id_user/keywords/")
+        .get(jwtMiddleware.VerifyUserToken, keywordController.GetAllByIdUser);
 
-    app.route("/keywords/:keyword/user/:id_user")
-        .get(jwtMiddleware.VerifyUserToken, keywordController.getMultiByIdUser)
+    // app.route("/users/:id_user/keywords/:keyword")
+    //     .get(jwtMiddleware.VerifyUserToken, keywordController.GetMultiByIdUser);
 
-    app.route("/keyword/:keyword_id/")
-        .get(jwtMiddleware.VerifyUserToken, keywordController.GetAKeyword)
-        .put(jwtMiddlewagre.VerifyUserToken, keywordController.UpdateAKeyword)
-        .delete(jwtMiddleware.VerifyUserToken, keywordController.DeleteAKeyword);
+    // app.route("/keyword/:keyword_id/")
+    //     .get(jwtMiddleware.VerifyUserToken, keywordController.GetAKeyword)
+    //     .put(jwtMiddleware.VerifyUserToken, keywordController.UpdateAKeyword)
+    //     .delete(jwtMiddleware.VerifyUserToken, keywordController.DeleteAKeyword);
     
+
+
 }
