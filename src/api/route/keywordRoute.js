@@ -2,18 +2,12 @@ const keywordController = require("../controller/keywordController");
 const jwtMiddleware = require("../middleware/jwtMiddleware");
 
 module.exports = (app) => {
-
-
     app.route("/users/:id_user/keywords")
         .post(jwtMiddleware.VerifyUserToken, keywordController.CreateKeywordByIdUser)
         .get(jwtMiddleware.VerifyUserToken, keywordController.GetAllKeywordsByIdUser);
-
-        
+  
     app.route("/users/:id_user/keywords/:id_keyword")
         .get(jwtMiddleware.VerifyUserToken, keywordController.GetKeywoardByIdUserAndIdKeyword);
-
-    app.route("/keywords")
-        .get(jwtMiddleware.VerifyUserToken, keywordController.GetAllKeywoards);
 
     app.route("/keywords/:id_keyword/")
         .get(jwtMiddleware.VerifyUserToken, keywordController.GetAKeyword)
