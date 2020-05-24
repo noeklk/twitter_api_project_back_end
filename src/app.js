@@ -33,7 +33,9 @@ tokenRoute(app);
 
 // Importe la fonction anonyme dans la constante
 const userRoute = require("./api/route/userRoute");
+const keywordRoute = require("./api/route/keywordRoute");
 // Utilise la fonction anonyme contenu dans la constante
 userRoute(app);
+keywordRoute(app);
 
 app.listen(port, hostname);

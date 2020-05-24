@@ -34,6 +34,7 @@ exports.GetAllUsers = (req, res) => {
                 res.json(users);
             }
             else {
+        
                 res.status(400);
                 console.log(error);
                 res.json({ message: "Aucun utilisateur trouvé" });
