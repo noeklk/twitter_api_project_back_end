@@ -4,6 +4,10 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const session = require("express-session");
+
+const sessionController = require("./api/controller/sessionController.js")
+
 
 // Configuration réseau
 const app = express();
@@ -37,5 +41,14 @@ const keywordRoute = require("./api/route/keywordRoute");
 // Utilise la fonction anonyme contenu dans la constante
 userRoute(app);
 keywordRoute(app);
+
+
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
+app.use((req, res, next) => {
+    res.locals.session = req.session;
+    next();
+});
+
+app.use("/sessions", sessionController);
 
 app.listen(port, hostname);
