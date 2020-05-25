@@ -4,6 +4,12 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+var schedule = require('node-schedule');
+
+// test CRON
+var job = schedule.scheduleJob('0 */10 * * * *', () => {
+    console.log('execute JOB');
+});    
 
 // Configuration réseau
 const app = express();
