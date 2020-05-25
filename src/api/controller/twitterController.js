@@ -1,6 +1,13 @@
-const express = require("express");
-const router = express.Router();
 const T = require("twit");
+
+function GetAccessTokensFromRequestHeaders(req) {
+    let accessTokens = {
+        accessToken: req.headers.accesstoken,
+        accessTokenSecret: req.headers.accesstokensecret
+    }
+
+    return accessTokens;
+}
 
 function GenerateTwitClient(accessToken, accessTokenSecret) {
     const twit = new T({
@@ -13,12 +20,9 @@ function GenerateTwitClient(accessToken, accessTokenSecret) {
     return twit;
 }
 
-router.get("/get_tweets", (req, res) => {
-
-    let accessToken = req.headers.accesstoken;
-    let accessTokenSecret = req.headers.accesstokensecret;
-
-    const twit = GenerateTwitClient(accessToken, accessTokenSecret);
+exports.GetUserTweets = (req, res) => {
+    const accessTokens = GetAccessTokensFromRequestHeaders(req);
+    const twit = GenerateTwitClient(accessTokens.accessToken, accessTokens.accessTokenSecret);
 
     try {
         twit.get("statuses/home_timeline", (err, data) => {
@@ -33,7 +37,4 @@ router.get("/get_tweets", (req, res) => {
     } catch (error) {
         res.status(500).json({ message: "Erreur API" });
     }
-
-});
-
-module.exports = router;
+};

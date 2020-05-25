@@ -6,9 +6,6 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const session = require("express-session");
 
-const sessionController = require("./api/controller/sessionController.js");
-const twitterController = require("./api/controller/twitterController.js");
-
 // Configuration réseau
 const app = express();
 const hostname = "0.0.0.0";
@@ -38,6 +35,7 @@ tokenRoute(app);
 // Importe la fonction anonyme dans la constante
 const userRoute = require("./api/route/userRoute");
 const keywordRoute = require("./api/route/keywordRoute");
+
 // Utilise la fonction anonyme contenu dans la constante
 userRoute(app);
 keywordRoute(app);
@@ -49,7 +47,10 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use("/sessions", sessionController);
-app.use("/tweeter", twitterController);
+const sessionRoute = require("./api/route/sessionRoute");
+sessionRoute(app);
+
+const twitterRoute = require("./api/route/twitterRoute");
+twitterRoute(app);
 
 app.listen(port, hostname);
