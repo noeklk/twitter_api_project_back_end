@@ -4,8 +4,8 @@ const T = require("twit");
 
 router.get("/get_tweets", (req, res) => {
 
-    let accessToken = req.headers.AccessToken;
-    let accessTokenSecret = req.headers.AccessTokenSecret
+    let accessToken = req.headers.accesstoken;
+    let accessTokenSecret = req.headers.accesstokensecret;
 
     console.log(accessToken);
     console.log(accessTokenSecret);
