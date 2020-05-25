@@ -4,12 +4,35 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-var schedule = require('node-schedule');
+const schedule = require('node-schedule');
+const Twit = require("twit");
+
+// Ref : https://developer.twitter.com/en/docs/tweets/rules-and-filtering/guides/build-standard-queries
+
+const T = new Twit({
+    consumer_key:         'your key',
+    consumer_secret:      'your secret',
+    access_token:         'your token',
+    access_token_secret:  'your secret token'
+});
 
 // test CRON
-var job = schedule.scheduleJob('0 */10 * * * *', () => {
-    console.log('execute JOB');
-});    
+const job = schedule.scheduleJob('1 * * * * *', () => {
+    console.log('execute job');
+
+    // max 100
+    T.get('search/tweets', { q: '#Happiness', count: 10 })
+    .catch(function (err) {
+        console.log('caught error', err.stack);
+    })
+    .then(function (result) {
+        // console.log(element.created_at);
+        for (let element of result.data['statuses']) {
+            console.log(element.created_at);
+            console.log(JSON.stringify(result.data, null, 2));
+        }
+    });
+});
 
 // Configuration réseau
 const app = express();
