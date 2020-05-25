@@ -20,12 +20,20 @@ router.get("/get_tweets", (req, res) => {
 
     const twit = GenerateTwitClient(accessToken, accessTokenSecret);
 
-    twit.get("statuses/home_timeline", (err, data, response) => {
-        console.log("data", data);
-        // console.log("response", response);
-    });
+    try {
+        twit.get("statuses/home_timeline", (err, data, response) => {
+            console.log("data", data);
+            // console.log("response", response);
+            if (!err) {
+                res.status(200).json({ data });
+            } else {
+                res.status(400).json({ message: "Erreur API" });
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Erreur API" });
+    }
 
-    res.json({ test: "test" });
 });
 
 module.exports = router;
