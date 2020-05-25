@@ -1,4 +1,3 @@
-
 const express = require("express");
 const router = express.Router();
 const oauth = require("oauth");
@@ -23,10 +22,6 @@ router.get("/connect", (req, res) => {
 });
 
 router.get("/saveAccessTokens", (req, res) => {
-    console.log("req:");
-    console.log(req);
-    console.log("res:");
-    console.log(res);
     consumer.getOAuthAccessToken(
         req.query.oauth_token,
         req.session.oauthRequestTokenSecret,
@@ -34,9 +29,9 @@ router.get("/saveAccessTokens", (req, res) => {
         (error, oauthAccessToken, oauthAccessTokenSecret) => {
             if (!error) {
                 req.session.oauthAccessToken = oauthAccessToken;
-                req.session.oauthAccessTokenSecret = oauthAccessTokenSecret
-                return res.send({ message: "token saved", one: req.session.oauthAccessToken, two: req.session.oauthAccessTokenSecret });
+                req.session.oauthAccessTokenSecret = oauthAccessTokenSecret;
 
+                return res.json({ oauthAccessToken, oauthAccessTokenSecret });
             }
             else {
                 res.status(500).json({ message: error })

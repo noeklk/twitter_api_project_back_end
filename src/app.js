@@ -6,8 +6,8 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const session = require("express-session");
 
-const sessionController = require("./api/controller/sessionController.js")
-
+const sessionController = require("./api/controller/sessionController.js");
+const twitterController = require("./api/controller/twitterController.js");
 
 // Configuration réseau
 const app = express();
@@ -50,5 +50,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/sessions", sessionController);
+app.use("/tweeter", twitterController);
 
 app.listen(port, hostname);
