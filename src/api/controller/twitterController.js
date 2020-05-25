@@ -21,9 +21,9 @@ router.get("/get_tweets", (req, res) => {
     const twit = GenerateTwitClient(accessToken, accessTokenSecret);
 
     try {
-        twit.get("statuses/home_timeline", (err, data, response) => {
+        twit.get("statuses/home_timeline", (err, data) => {
             console.log("data", data);
-            // console.log("response", response);
+
             if (!err) {
                 res.status(200).json({ data });
             } else {
