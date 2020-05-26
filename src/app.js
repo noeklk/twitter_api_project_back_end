@@ -10,29 +10,55 @@ const Twit = require("twit");
 // Ref : https://developer.twitter.com/en/docs/tweets/rules-and-filtering/guides/build-standard-queries
 
 const T = new Twit({
-    consumer_key:         'your key',
-    consumer_secret:      'your secret',
-    access_token:         'your token',
-    access_token_secret:  'your secret token'
+    consumer_key: process.env.TWITTER_CONSUMER_KEY,
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+    access_token: process.env.TWITTER_ACCESS_TOKEN,
+    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
+// max 100
+let word = ['ipssi', 'tpmp', 'nike'];
+
+const keywordsParse = (keywordsList) => {
+    let keyListString = keywordsList.toString();
+    console.log(keyListString);
+}
+
+keywordsParse(word);
+
 
 // test CRON
-const job = schedule.scheduleJob('1 * * * * *', () => {
+const job = schedule.scheduleJob('/10 * * * * *', () => {
     console.log('execute job');
 
     // max 100
-    T.get('search/tweets', { q: '#Happiness', count: 10 })
+    let word = ['ipssi', 'tpmp', 'nike'];
+
+    const keywordsParse = (keywordsList) => {
+        let keyListString = keywordsList.toString();
+        console.log(keyListString);
+    }
+
+    keywordsParse(word);
+
+    // TODO: Functions pour incrémenter les mots
+     T.get('search/tweets', { q: `#${word}`, count: 2 })
     .catch(function (err) {
         console.log('caught error', err.stack);
     })
     .then(function (result) {
-        // console.log(element.created_at);
+        const parseData = [];
         for (let element of result.data['statuses']) {
-            console.log(element.created_at);
-            console.log(JSON.stringify(result.data, null, 2));
+            parseData.push({
+                date: element.created_at,
+                idTweet: element.id,
+                keyword: word
+            })
         }
-    });
+
+        console.log('data parsed', parseData);
+    }); 
 });
+
 
 // Configuration réseau
 const app = express();
