@@ -26,12 +26,10 @@ exports.GetUserTweets = (req, res) => {
 
     try {
         twit.get("statuses/user_timeline", (err, data) => {
-            console.log("data", data);
-
             if (!err) {
                 res.status(200).json({ data });
             } else {
-                res.status(400).json({ message: "Erreur API" });
+                res.status(400).json({ message: err });
             }
         });
     } catch (error) {
