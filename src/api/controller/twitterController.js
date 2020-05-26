@@ -25,7 +25,7 @@ exports.GetUserTweets = (req, res) => {
     const twit = GenerateTwitClient(accessTokens.accessToken, accessTokens.accessTokenSecret);
 
     try {
-        twit.get("statuses/home_timeline", (err, data) => {
+        twit.get("statuses/user_timeline", (err, data) => {
             console.log("data", data);
 
             if (!err) {
