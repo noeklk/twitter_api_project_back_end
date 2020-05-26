@@ -62,7 +62,7 @@ exports.UserRegister = (req, res) => {
             } else {
                 res.status(400);
                 console.log(error);
-                res.json({ message: errorMessage });
+                res.json({ message: "L'utilisateur existe déja" });
             }
         });
     }
