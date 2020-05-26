@@ -22,13 +22,24 @@ const keywordsParse = (keyword) => {
     return !isMatch ? "#".concat(keyword) : keyword;
 }
 
-// test CRON
+// Configuration réseau
+const app = express();
+const hostname = "0.0.0.0";
+const port = 3000;
+
+// Connexion BDD
+// protocole://service/nom_bdd
+mongoose.connect("mongodb://mongo/" + process.env.DB_NAME, { useNewUrlParser: true, useUnifiedTopology: true });
+
+// Configuration mongoose
+mongoose.set("useCreateIndex", true);
+
+// CRON Keywords
 const job = schedule.scheduleJob('/10 * * * * *', () => {
     console.log('execute job');
     let word = 'tpmp';
 
-    // TODO: Functions pour incrémenter les mots
-     T.get('search/tweets', { q: keywordsParse(word), count: 2 })
+    T.get('search/tweets', { q: keywordsParse(word), count: 2 })
     .catch(function (err) {
         console.log('caught error', err.stack);
     })
@@ -45,19 +56,6 @@ const job = schedule.scheduleJob('/10 * * * * *', () => {
         console.log('data parsed', parseData);
     }); 
 });
-
-
-// Configuration réseau
-const app = express();
-const hostname = "0.0.0.0";
-const port = 3000;
-
-// Connexion BDD
-// protocole://service/nom_bdd
-mongoose.connect("mongodb://mongo/" + process.env.DB_NAME, { useNewUrlParser: true, useUnifiedTopology: true });
-
-// Configuration mongoose
-mongoose.set("useCreateIndex", true);
 
 // Permet l'envoi d'objet js en json
 app.use(bodyParser.urlencoded({ extended: true }));
