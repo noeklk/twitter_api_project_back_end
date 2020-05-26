@@ -46,11 +46,12 @@ const job = schedule.scheduleJob('/10 * * * * *', () => {
     .then(function (result) {
         const parseData = [];
         for (let element of result.data['statuses']) {
-            parseData.push({
-                date: element.created_at,
-                idTweet: element.id,
-                keyword: keywordsParse(word)
-            })
+            console.log(element);
+           // parseData.push({
+            //    date: element.created_at,
+            //    idTweet: element.id,
+            //    keyword: keywordsParse(word)
+            //})
         }
 
         console.log('data parsed', parseData);
