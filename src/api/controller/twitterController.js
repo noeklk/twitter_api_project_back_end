@@ -9,20 +9,21 @@ function GetAccessTokensFromRequestHeaders(req) {
     return accessTokens;
 }
 
-function GenerateTwitClient(accessToken, accessTokenSecret) {
+function GenerateTwitClient(req) {
+    let accessTokens = GetAccessTokensFromRequestHeaders(req);
+
     const twit = new T({
         consumer_key: process.env.TWITTER_CONSUMER_KEY,
         consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-        access_token: accessToken,
-        access_token_secret: accessTokenSecret
+        access_token: accessTokens.accessToken,
+        access_token_secret: accessTokens.accessTokenSecret
     });
 
     return twit;
 }
 
 exports.GetUserTweets = (req, res) => {
-    const accessTokens = GetAccessTokensFromRequestHeaders(req);
-    const twit = GenerateTwitClient(accessTokens.accessToken, accessTokens.accessTokenSecret);
+    const twit = GenerateTwitClient(req);
 
     try {
         twit.get("statuses/user_timeline", (err, data) => {
