@@ -15,33 +15,20 @@ const T = new Twit({
     access_token: process.env.TWITTER_ACCESS_TOKEN,
     access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
-// max 100
-let word = ['ipssi', 'tpmp', 'nike'];
 
-const keywordsParse = (keywordsList) => {
-    let keyListString = keywordsList.toString();
-    console.log(keyListString);
+const keywordsParse = (keyword) => {
+    let regex = /[#]/g;
+    let isMatch = keyword.match(regex);
+    return !isMatch ? "#".concat(keyword) : keyword;
 }
-
-keywordsParse(word);
-
 
 // test CRON
 const job = schedule.scheduleJob('/10 * * * * *', () => {
     console.log('execute job');
-
-    // max 100
-    let word = ['ipssi', 'tpmp', 'nike'];
-
-    const keywordsParse = (keywordsList) => {
-        let keyListString = keywordsList.toString();
-        console.log(keyListString);
-    }
-
-    keywordsParse(word);
+    let word = 'tpmp';
 
     // TODO: Functions pour incrémenter les mots
-     T.get('search/tweets', { q: `#${word}`, count: 2 })
+     T.get('search/tweets', { q: keywordsParse(word), count: 2 })
     .catch(function (err) {
         console.log('caught error', err.stack);
     })
@@ -51,7 +38,7 @@ const job = schedule.scheduleJob('/10 * * * * *', () => {
             parseData.push({
                 date: element.created_at,
                 idTweet: element.id,
-                keyword: word
+                keyword: keywordsParse(word)
             })
         }
 
