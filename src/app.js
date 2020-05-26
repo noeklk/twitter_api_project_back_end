@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const session = require("express-session");
 
 // Configuration réseau
 const app = express();
@@ -34,8 +35,22 @@ tokenRoute(app);
 // Importe la fonction anonyme dans la constante
 const userRoute = require("./api/route/userRoute");
 const keywordRoute = require("./api/route/keywordRoute");
+
 // Utilise la fonction anonyme contenu dans la constante
 userRoute(app);
 keywordRoute(app);
+
+
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
+app.use((req, res, next) => {
+    res.locals.session = req.session;
+    next();
+});
+
+const sessionRoute = require("./api/route/sessionRoute");
+sessionRoute(app);
+
+const twitterRoute = require("./api/route/twitterRoute");
+twitterRoute(app);
 
 app.listen(port, hostname);
