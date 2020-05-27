@@ -89,8 +89,38 @@ exports.GetKeywordByIdUserAndIdKeyword = (req, res) => {
     }
 }
 
+exports.GetKeywordByIdUserAndKeyword = (req, res) => {
+    const { id_user } = req.params;
+    const { keyword } = req.params;
+
+    try {
+        User.findOne({ _id: id_user }, (error, user) => {
+            if (!user) {
+                return res.status(400).json({ message: "L'utilisateur n'existe pas" });
+            }
+            else {
+                Keyword.find({ keyword }, (error, keyword) => {
+                    if (!error) {
+                        res.status(200);
+                        res.json(keyword);
+                    }
+                    else {
+                        res.status(400);
+                        console.log(error);
+                        res.json({ message: "Aucun mot trouvé" });
+                    }
+                })
+            }
+        })
+    } catch (e) {
+        res.status(500);
+        console.log(e);
+        res.json({ message: errorMessage });
+    }
+}
+
 // Récupère un keyword de la BD par son id
-exports.GetAKeyword = (req, res) => {
+exports.GetAKeywordById = (req, res) => {
     try {
         const id_keyword = req.params.id_keyword;
         Keyword.findById(id_keyword, (error, keyword) => {
@@ -115,7 +145,7 @@ exports.GetAKeyword = (req, res) => {
 
 
 // Mise a jour d'un keyword dans la BD par son id
-exports.UpdateAKeyword = (req, res) => {
+exports.UpdateAKeywordById = (req, res) => {
     try {
         const id_keyword = req.params.id_keyword;
         let updateK = req.body;
@@ -140,7 +170,7 @@ exports.UpdateAKeyword = (req, res) => {
 }
 
 // Supprime un keyword dans la BD par son id
-exports.DeleteAKeyword = (req, res) => {
+exports.DeleteAKeywordById = (req, res) => {
     try {
         const id_keyword = req.params.id_keyword;
         Keyword.findByIdAndDelete(id_keyword, (error, keyword) => {
