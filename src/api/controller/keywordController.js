@@ -58,37 +58,6 @@ exports.GetAllKeywordsByIdUser = (req, res) => {
 
 }
 
-// Récupère un keyword d'un utilisateur
-exports.GetKeywordByIdUserAndIdKeyword = (req, res) => {
-    const { id_user } = req.params;
-    const { id_keyword } = req.params;
-
-    try {
-        User.findOne({ _id: id_user }, (error, user) => {
-            if (!user) {
-                return res.status(400).json({ message: "L'utilisateur n'existe pas" });
-            }
-            else {
-                Keyword.findById(id_keyword, (error, keyword) => {
-                    if (!error) {
-                        res.status(200);
-                        res.json(keyword);
-                    }
-                    else {
-                        res.status(400);
-                        console.log(error);
-                        res.json({ message: "Aucun mot trouvé" });
-                    }
-                })
-            }
-        })
-    } catch (e) {
-        res.status(500);
-        console.log(e);
-        res.json({ message: errorMessage });
-    }
-}
-
 exports.GetKeywordByIdUserAndKeyword = (req, res) => {
     const { id_user } = req.params;
     const { keyword } = req.params;
@@ -100,7 +69,7 @@ exports.GetKeywordByIdUserAndKeyword = (req, res) => {
             }
             else {
                 Keyword.find({ keyword }, (error, keyword) => {
-                    if (!error) {
+                    if (!error && keyword.length) {
                         res.status(200);
                         res.json(keyword);
                     }

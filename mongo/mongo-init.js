@@ -34,21 +34,21 @@ db.keywords.insertMany([
     created_at: "2020-05-29T18:47:07.037Z"
   },
   {
-    _id: ObjectId("5e3609da3a957000384b4eec"),
+    _id: ObjectId("5e3609da3a957340384b4eec"),
     keyword: "covid19",
     tweets_number: "555",
     id_user: "5e3609dd3a957000387b4eef",
     created_at: "2020-05-30T18:47:07.037Z"
   },
   {
-    _id: ObjectId("5e3604da3a957000384b4eec"),
+    _id: ObjectId("5e3604da3a957056384b4eec"),
     keyword: "covid19",
     tweets_number: "600",
     id_user: "5e3609dd3a957000387b4eef",
     created_at: "2020-05-31T18:47:07.037Z"
   },
   {
-    _id: ObjectId("5e3605da3a957000384b4eec"),
+    _id: ObjectId("5e3604da3a957056384b3eec"),
     keyword: "covid19",
     tweets_number: "700",
     id_user: "5e3609dd3a957000387b4eef",
