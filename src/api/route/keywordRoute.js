@@ -5,9 +5,9 @@ module.exports = (app) => {
     app.route("/users/:id_user/keywords")
         .post(jwtMiddleware.VerifyUserToken, keywordController.CreateKeywordByIdUser)
         .get(jwtMiddleware.VerifyUserToken, keywordController.GetAllKeywordsByIdUser);
-  
+
     app.route("/users/:id_user/keywords/:id_keyword")
-        .get(jwtMiddleware.VerifyUserToken, keywordController.GetKeywoardByIdUserAndIdKeyword);
+        .get(jwtMiddleware.VerifyUserToken, keywordController.GetKeywordByIdUserAndIdKeyword);
 
     app.route("/keywords/:id_keyword/")
         .get(jwtMiddleware.VerifyUserToken, keywordController.GetAKeyword)
