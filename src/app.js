@@ -39,22 +39,19 @@ const job = schedule.scheduleJob('/10 * * * * *', () => {
     console.log('execute job');
     let word = 'tpmp';
 
-    T.get('search/tweets', { q: keywordsParse(word), count: 2 })
+    T.get('trends/place', { id: 615702 })
     .catch(function (err) {
         console.log('caught error', err.stack);
     })
     .then(function (result) {
-        const parseData = [];
-        for (let element of result.data['statuses']) {
-            console.log(element);
-           // parseData.push({
-            //    date: element.created_at,
-            //    idTweet: element.id,
-            //    keyword: keywordsParse(word)
-            //})
+        // console.log(JSON.stringify(result.data, null, 2));
+        // insérer ou mettre à jour tous les mots clés tendance (50)
+        // Attention, l'api retourne parfois un tweet_volume null, ignorer
+
+        for (let keyword of result.data[0].trends) {
+            console.log("keyword : " + keyword.name + " tweets : " + keyword.tweet_volume);
         }
 
-        console.log('data parsed', parseData);
     }); 
 });
 
