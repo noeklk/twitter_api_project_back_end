@@ -14,3 +14,35 @@ db.users.insertMany([
     created_at: Date.now.apply()
   }
 ]);
+
+// Keywords
+db.keywords.insertMany([
+  {
+    _id: ObjectId("5e3609dd3a957000387b4eec"),
+    keyword: "covid19",
+    tweets_number: "500",
+    id_user: "5e3609dd3a957000387b4eef",
+    created_at: Date.now.apply()
+  },
+  {
+    _id: ObjectId("5e3609dd3a957000387b4eed"),
+    keyword: "trump",
+    tweets_number: "850",
+    id_user: "5e3609dd3a957000387b4eef",
+    created_at: Date.now.apply()
+  },
+  {
+    _id: ObjectId("5e3609dd3a957000387b3eed"),
+    keyword: "valorant",
+    tweets_number: "1250",
+    id_user: "5e3609dd3a957000387b4eef",
+    created_at: Date.now.apply()
+  },
+  {
+    _id: ObjectId("5e3609dd3a957000387b4edd"),
+    keyword: "tpmp",
+    tweets_number: "250",
+    id_user: "5e3609dd3a957000387b4eef",
+    created_at: Date.now.apply()
+  }
+])
