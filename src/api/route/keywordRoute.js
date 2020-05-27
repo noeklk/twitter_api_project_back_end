@@ -14,4 +14,6 @@ module.exports = (app) => {
         .put(jwtMiddleware.VerifyUserToken, keywordController.UpdateAKeyword)
         .delete(jwtMiddleware.VerifyUserToken, keywordController.DeleteAKeyword);
 
+    app.route("/keywordsTrends/:id_country")
+        .get(jwtMiddleware.VerifyUserToken, keywordController.GetKeywordByCountry);  
 }
