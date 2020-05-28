@@ -50,13 +50,29 @@ exports.GetKeywordTrendByCountry = (req, res) => {
                 res.status(200).json({ data });
             } else {
                 res.status(400).json({ message: err });
+        }
+    });
+    } catch (error) {
+        res.status(500).json({ message: "Erreur API" });
+    }
+};
+
+exports.InvalidateUserToken = (req, res) => {
+    const twit = GenerateTwitClient(req);
+
+    try {
+        twit.post("oauth/invalidate_token", (err, data, resp) => {
+            if (!err) {
+                res.status(200).json({ data });
+            } else {
+                res.status(400).json({ message: err });
+                console.log(resp);
             }
         });
     } catch (error) {
         res.status(500).json({ message: "Erreur API" });
     }
 };
-
 
 // Récupère tous les woeids qu'utilise twitter
 exports.GetWoeids = (req, res) => {

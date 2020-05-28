@@ -13,4 +13,7 @@ module.exports = (app) => {
 
     app.route("/twitter/woeids")
         .get(twitterController.GetWoeids);
+
+    app.route("/twitter/invalidate_token")
+        .post(jwtMiddleware.VerifyUserToken, twitterController.InvalidateUserToken);
 };
