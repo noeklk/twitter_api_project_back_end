@@ -8,10 +8,11 @@
 
 This API allows :
 
-- Users can signup and login in the application
-- Users can login in the application with his account Twitter
-- Users can see the tweets trends for each country
-- Datavizualisation of the setup keyword to display the differences with time.
+- CRUD Users.
+- Database MongoDB.
+- CRUD Keywords.
+- Twitter API.
+- CRON jobs will check every 10 minutes, if a tweet is posted about that keyword and store the number in database.
 
 
 ### Instructions
