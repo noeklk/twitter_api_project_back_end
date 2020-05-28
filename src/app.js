@@ -4,8 +4,6 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const schedule = require('node-schedule');
-
 const session = require("express-session");
 
 // Configuration réseau
