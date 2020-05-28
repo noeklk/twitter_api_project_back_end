@@ -5,12 +5,13 @@ module.exports = (app) => {
     app.route("/users/:id_user/keywords")
         .post(jwtMiddleware.VerifyUserToken, keywordController.CreateKeywordByIdUser)
         .get(jwtMiddleware.VerifyUserToken, keywordController.GetAllKeywordsByIdUser);
-  
-    app.route("/users/:id_user/keywords/:id_keyword")
-        .get(jwtMiddleware.VerifyUserToken, keywordController.GetKeywoardByIdUserAndIdKeyword);
+
+    app.route("/users/:id_user/keywords/:keyword")
+        .get(jwtMiddleware.VerifyUserToken, keywordController.GetKeywordByIdUserAndKeyword);
 
     app.route("/keywords/:id_keyword/")
-        .get(jwtMiddleware.VerifyUserToken, keywordController.GetAKeyword)
-        .put(jwtMiddleware.VerifyUserToken, keywordController.UpdateAKeyword)
-        .delete(jwtMiddleware.VerifyUserToken, keywordController.DeleteAKeyword);
-};
+        .get(jwtMiddleware.VerifyUserToken, keywordController.GetAKeywordById)
+        .put(jwtMiddleware.VerifyUserToken, keywordController.UpdateAKeywordById)
+        .delete(jwtMiddleware.VerifyUserToken, keywordController.DeleteAKeywordById);
+
+}
