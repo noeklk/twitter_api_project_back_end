@@ -48,14 +48,17 @@ Here is a few requirements to use the application with this api
 
 ### Credits & Licence
 29/05/2020 - GPL3 Licence (Open Source)
-&nbsp;
-&nbsp;
+
+
 
 **Noé ABDEL KALEK**  - *Front-End & Back-End Developer (Project Manager)*
-&nbsp;&nbsp;
+
+
 **Jéremie VANG FOUA**  - *Front-End & Back-End Developer*
-&nbsp;&nbsp;
+
+
 **Zayd SELMANI**  - *Front-End & Back-End Developer*  
-&nbsp;&nbsp;
+
+
 **Ouijdane EL IDRISSI RIOUI** - *Front-End & Back-End Developer*
-&nbsp;&nbsp;
+
