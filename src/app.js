@@ -5,16 +5,8 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const schedule = require('node-schedule');
-const Twit = require("twit");
 
 // Ref : https://developer.twitter.com/en/docs/tweets/rules-and-filtering/guides/build-standard-queries
-
-const T = new Twit({
-    consumer_key: process.env.TWITTER_CONSUMER_KEY,
-    consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-    access_token: process.env.TWITTER_ACCESS_TOKEN,
-    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
-});
 
 const keywordsParse = (keyword) => {
     let regex = /[#]/g;
@@ -36,25 +28,25 @@ mongoose.connect("mongodb://mongo/" + process.env.DB_NAME, { useNewUrlParser: tr
 mongoose.set("useCreateIndex", true);
 
 // CRON Keywords
-const job = schedule.scheduleJob('/10 * * * * *', () => {
-    console.log('execute job');
-    let word = 'tpmp';
+// const job = schedule.scheduleJob('/10 * * * * *', () => {
+//     console.log('execute job');
+//     let word = 'tpmp';
 
-    T.get('trends/place', { id: 615702 })
-    .catch(function (err) {
-        console.log('caught error', err.stack);
-    })
-    .then(function (result) {
-        // console.log(JSON.stringify(result.data, null, 2));
-        // insérer ou mettre à jour tous les mots clés tendance (50)
-        // Attention, l'api retourne parfois un tweet_volume null, ignorer
+//     T.get('trends/place', { id: 615702 })
+//     .catch(function (err) {
+//         console.log('caught error', err.stack);
+//     })
+//     .then(function (result) {
+//         // console.log(JSON.stringify(result.data, null, 2));
+//         // insérer ou mettre à jour tous les mots clés tendance (50)
+//         // Attention, l'api retourne parfois un tweet_volume null, ignorer
 
-        for (let keyword of result.data[0].trends) {
-            console.log("keyword : " + keyword.name + " tweets : " + keyword.tweet_volume);
-        }
+//         for (let keyword of result.data[0].trends) {
+//             console.log("keyword : " + keyword.name + " tweets : " + keyword.tweet_volume);
+//         }
 
-    }); 
-});
+//     }); 
+// });
 
 // Permet l'envoi d'objet js en json
 app.use(bodyParser.urlencoded({ extended: true }));
