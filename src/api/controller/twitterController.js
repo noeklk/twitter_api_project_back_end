@@ -42,9 +42,27 @@ exports.GetUserInfos = (req, res) => {
     const twit = GenerateTwitClient(req);
 
     try {
-        // twit.get("statuses/user_timeline.json?count=1", (err, data) => {
         twit.get("account/verify_credentials", (err, data) => {
             if (!err) {
+                res.status(200).json({ data });
+            } else {
+                res.status(400).json({ message: err });
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Erreur API" });
+    }
+};
+
+// Récupère tous les keywords tendances d'un woeid
+exports.GetKeywordTrendByCountry = (req, res) => {
+    const { woeid } = req.params;
+    const twit = GenerateTwitClient(req);
+
+    try {
+        twit.get("trends/place", { id: woeid }, (err, data) => {
+            if (!err) {
+                console.log(JSON.stringify(data, null, 2));
                 res.status(200).json({ data });
             } else {
                 res.status(400).json({ message: err });
@@ -65,6 +83,23 @@ exports.InvalidateUserToken = (req, res) => {
             } else {
                 res.status(400).json({ message: err });
                 console.log(resp);
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Erreur API" });
+    }
+};
+
+// Récupère tous les woeids qu'utilise twitter
+exports.GetWoeids = (req, res) => {
+    const twit = GenerateTwitClient(req);
+
+    try {
+        twit.get("trends/available", (err, data) => {
+            if (!err) {
+                res.status(200).json({ data });
+            } else {
+                res.status(400).json({ message: err });
             }
         });
     } catch (error) {

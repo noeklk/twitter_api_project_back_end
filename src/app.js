@@ -40,7 +40,6 @@ const keywordRoute = require("./api/route/keywordRoute");
 userRoute(app);
 keywordRoute(app);
 
-
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
 app.use((req, res, next) => {
     res.locals.session = req.session;
