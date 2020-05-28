@@ -41,7 +41,6 @@ exports.GetUserTweets = (req, res) => {
 // Récupère tous les keywords tendances d'un woeid
 exports.GetKeywordTrendByCountry = (req, res) => {
     const { woeid } = req.params;
-    console.log("get keyword trend by country : trends/place?id="+woeid);
     const twit = GenerateTwitClient(req);
 
     try {
@@ -61,7 +60,6 @@ exports.GetKeywordTrendByCountry = (req, res) => {
 
 // Récupère tous les woeids qu'utilise twitter
 exports.GetWoeids = (req, res) => {
-    console.log("get woeids");
     const twit = GenerateTwitClient(req);
 
     try {
