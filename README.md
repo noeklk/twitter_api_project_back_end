@@ -25,7 +25,9 @@ This API allows :
 * Javascript (Node.JS)
 
 ### Base URL to API : 
-`http://127.0.0.1:4200/home`
+`http://127.0.0.1:3000/`
+or
+`http://localhost:3000/`
 
 #### Environment variables :
 Rename the .env.sample file to .env and insert your values
