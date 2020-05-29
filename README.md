@@ -31,12 +31,13 @@ This API allows :
 Rename the .env.sample file to .env and insert your values
 
 ```
-USER_JWT_KEY=YOUR_GUEST_JWT_KEY
+USER_JWT_KEY=XXX (Anything that is unique)
 DB_NAME=YOUR_DB_NAME ("test" to use mocked datas)
 
 TWITTER_CONSUMER_KEY=XXX  (Use your Twitter App api consumer key 'Your Twitter App > Details > Keys And Tokens')
 TWITTER_CONSUMER_SECRET=XXX (Use your Twitter App api consumer secret key 'Your Twitter App > Details > Keys And Tokens')
-SESSION_SECRET=XXX
+
+SESSION_SECRET=XXX (Anything that is unique)
 ```
 
 Here is a few requirements to use the application with this api
