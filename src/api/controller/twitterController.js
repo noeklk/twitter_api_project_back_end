@@ -106,3 +106,20 @@ exports.GetWoeids = (req, res) => {
         res.status(500).json({ message: "Erreur API" });
     }
 };
+
+// Post un tweet (update status)
+exports.updateStatus = (req, res) => {
+    const twit = GenerateTwitClient(req);
+
+    try {
+        twit.post("statuses/update", { status: req.body.status }, (err, data) => {
+            if (!err) {
+                res.status(200).json({ data });
+            } else {
+                res.status(400).json({ message: err });
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Erreur API" });
+    }
+};
