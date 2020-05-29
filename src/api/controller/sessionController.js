@@ -1,9 +1,9 @@
 const oauth = require("oauth");
 const config = require("../../config");
-const _twitterConsumerKey = process.env.TWITTER_CONSUMER_KEY;
-const _twitterConsumerSecret = process.env.TWITTER_CONSUMER_SECRET;
-const twitterCallbackUrl = config.TWITTER_CALLBACK_URL;
-const consumer = new oauth.OAuth("https://twitter.com/oauth/request_token", "https://twitter.com/oauth/access_token", _twitterConsumerKey, _twitterConsumerSecret, "1.0A", twitterCallbackUrl, "HMAC-SHA1");
+const _twitterConsumerKey = config.TWITTER_CONSUMER_KEY;
+const _twitterConsumerSecret = config.TWITTER_CONSUMER_SECRET;
+const _twitterCallbackUrl = config.TWITTER_CALLBACK_URL;
+const consumer = new oauth.OAuth("https://twitter.com/oauth/request_token", "https://twitter.com/oauth/access_token", _twitterConsumerKey, _twitterConsumerSecret, "1.0A", _twitterCallbackUrl, "HMAC-SHA1");
 
 exports.Connect = (req, res) => {
     consumer.getOAuthRequestToken((error, oauthToken, oauthTokenSecret) => {
