@@ -14,7 +14,6 @@ This API allows :
 - Twitter API.
 - CRON jobs will check every 10 minutes, if a tweet is posted about that keyword and store the number in database.
 
-
 ### Instructions
 
 1.  You can either clone the project or download the latest release here :  [twitter_api_project_back_end](https://github.com/noeklk/twitter_api_project_back_end)
