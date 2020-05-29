@@ -62,7 +62,6 @@ exports.GetKeywordTrendByCountry = (req, res) => {
     try {
         twit.get("trends/place", { id: woeid }, (err, data) => {
             if (!err) {
-                console.log(JSON.stringify(data, null, 2));
                 res.status(200).json({ data });
             } else {
                 res.status(400).json({ message: err });
@@ -96,6 +95,23 @@ exports.GetWoeids = (req, res) => {
 
     try {
         twit.get("trends/available", (err, data) => {
+            if (!err) {
+                res.status(200).json({ data });
+            } else {
+                res.status(400).json({ message: err });
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Erreur API" });
+    }
+};
+
+// Post un tweet (update status)
+exports.UpdateStatus = (req, res) => {
+    const twit = GenerateTwitClient(req);
+
+    try {
+        twit.post("statuses/update", { status: req.body.status }, (err, data) => {
             if (!err) {
                 res.status(200).json({ data });
             } else {
