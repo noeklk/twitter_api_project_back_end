@@ -11,11 +11,14 @@ module.exports = (app) => {
     // Where On Earth IDentifier
     // France : 580778
     app.route("/twitter/trends/:woeid")
-        .get(twitterController.GetKeywordTrendByCountry);
+        .get(jwtMiddleware.VerifyUserToken, twitterController.GetKeywordTrendByCountry);
 
     app.route("/twitter/woeids")
-        .get(twitterController.GetWoeids);
+        .get(jwtMiddleware.VerifyUserToken, twitterController.GetWoeids);
 
     app.route("/twitter/invalidate_token")
         .post(jwtMiddleware.VerifyUserToken, twitterController.InvalidateUserToken);
+
+    app.route("/twitter/update_status")
+        .post(jwtMiddleware.VerifyUserToken, twitterController.updateStatus);
 };
