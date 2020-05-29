@@ -47,6 +47,13 @@ Here is a few requirements to use the application with this api
     -   Navigate to  `localhost:4200`  OR  `127.0.0.1:4200`
     -   Then if you used mocked datas by entering  `test`  into the  `DB_NAME`  environment key, you should be able to login the application with the following users  `mongo > mongo-init.js`  
 
+
+Pseudo | Password 
+--- | --- 
+Utilisateur 1 | Utilisateur 1
+Utilisateur 2 | Utilisateur 2
+
+
 ### Credits & Licence
 29/05/2020 - GPL3 Licence (Open Source)
 
