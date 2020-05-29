@@ -34,9 +34,8 @@ Rename the .env.sample file to .env and insert your values
 USER_JWT_KEY=YOUR_GUEST_JWT_KEY
 DB_NAME=YOUR_DB_NAME ("test" to use mocked datas)
 
-TWITTER_CONSUMER_KEY=XXX
-TWITTER_CONSUMER_SECRET=XXX
-TWITTER_CALLBACK_URL=XXX
+TWITTER_CONSUMER_KEY=XXX  (Use your Twitter App api consumer key 'Your Twitter App > Details > Keys And Tokens')
+TWITTER_CONSUMER_SECRET=XXX (Use your Twitter App api consumer secret key 'Your Twitter App > Details > Keys And Tokens')
 SESSION_SECRET=XXX
 ```
 
@@ -47,7 +46,6 @@ Here is a few requirements to use the application with this api
     -   Navigate to  `localhost:4200`  OR  `127.0.0.1:4200`
     -   Then if you used mocked datas by entering  `test`  into the  `DB_NAME`  environment key, you should be able to login the application with the following users  `mongo > mongo-init.js`  
 
-
 Pseudo | Password 
 --- | --- 
 Utilisateur 1 | Utilisateur 1
@@ -56,7 +54,6 @@ Utilisateur 2 | Utilisateur 2
 
 ### Credits & Licence
 29/05/2020 - GPL3 Licence (Open Source)
-
 
 
 **Noé ABDEL KALEK**  - *Front-End & Back-End Developer (Project Manager)*
