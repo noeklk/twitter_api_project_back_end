@@ -107,7 +107,7 @@ exports.GetWoeids = (req, res) => {
 };
 
 // Post un tweet (update status)
-exports.updateStatus = (req, res) => {
+exports.UpdateStatus = (req, res) => {
     const twit = GenerateTwitClient(req);
 
     try {

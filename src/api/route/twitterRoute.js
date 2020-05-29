@@ -20,5 +20,5 @@ module.exports = (app) => {
         .post(twitterController.InvalidateUserToken);
 
     app.route("/twitter/update_status")
-        .post(jwtMiddleware.VerifyUserToken, twitterController.updateStatus);
+        .post(jwtMiddleware.VerifyUserToken, twitterController.UpdateStatus);
 };
