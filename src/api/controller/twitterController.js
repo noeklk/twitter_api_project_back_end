@@ -29,7 +29,7 @@ exports.GetUserTweets = (req, res) => {
     try {
         twit.get("statuses/user_timeline", (err, data) => {
             if (!err) {
-                res.status(200).json({ data });
+                res.status(200).json(data);
             } else {
                 res.status(400).json({ message: err });
             }
@@ -45,7 +45,7 @@ exports.GetUserInfos = (req, res) => {
     try {
         twit.get("account/verify_credentials", (err, data) => {
             if (!err) {
-                res.status(200).json({ data });
+                res.status(200).json(data);
             } else {
                 res.status(400).json({ message: err });
             }
@@ -63,7 +63,7 @@ exports.GetKeywordTrendByCountry = (req, res) => {
     try {
         twit.get("trends/place", { id: woeid }, (err, data) => {
             if (!err) {
-                res.status(200).json({ data });
+                res.status(200).json(data);
             } else {
                 res.status(400).json({ message: err });
             }
@@ -79,7 +79,7 @@ exports.InvalidateUserToken = (req, res) => {
     try {
         twit.post("oauth/invalidate_token", (err, data, resp) => {
             if (!err) {
-                res.status(200).json({ data });
+                res.status(200).json(data);
             } else {
                 res.status(400).json({ message: err });
                 console.log(resp);
@@ -97,7 +97,7 @@ exports.GetWoeids = (req, res) => {
     try {
         twit.get("trends/available", (err, data) => {
             if (!err) {
-                res.status(200).json({ data });
+                res.status(200).json(data);
             } else {
                 res.status(400).json({ message: err });
             }
@@ -114,7 +114,7 @@ exports.UpdateStatus = (req, res) => {
     try {
         twit.post("statuses/update", { status: req.body.status }, (err, data) => {
             if (!err) {
-                res.status(200).json({ data });
+                res.status(200).json(data);
             } else {
                 res.status(400).json({ message: err });
             }
