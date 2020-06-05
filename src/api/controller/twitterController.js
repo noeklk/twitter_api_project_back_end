@@ -1,5 +1,4 @@
 const T = require("twit");
-const config = require("../../config");
 
 function GetAccessTokensFromRequestHeaders(req) {
     let accessTokens = {
@@ -14,8 +13,8 @@ function GenerateTwitClient(req) {
     let accessTokens = GetAccessTokensFromRequestHeaders(req);
 
     const twit = new T({
-        consumer_key: config.TWITTER_CONSUMER_KEY,
-        consumer_secret: config.TWITTER_CONSUMER_SECRET,
+        consumer_key: process.env.TWITTER_CONSUMER_KEY,
+        consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
         access_token: accessTokens.accessToken,
         access_token_secret: accessTokens.accessTokenSecret
     });
