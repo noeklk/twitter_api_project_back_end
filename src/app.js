@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const session = require("express-session");
+const trendsCron = require("./api/cron/trendsCron");
 
 // Configuration réseau
 const app = express();
@@ -39,6 +40,9 @@ const keywordRoute = require("./api/route/keywordRoute");
 // Utilise la fonction anonyme contenu dans la constante
 userRoute(app);
 keywordRoute(app);
+
+// Cron qui save toute les tendances dans la db toutes les 30 secondes
+trendsCron();
 
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
 app.use((req, res, next) => {
