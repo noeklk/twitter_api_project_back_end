@@ -21,4 +21,7 @@ module.exports = (app) => {
 
     app.route("/twitter/update_status")
         .post(jwtMiddleware.VerifyUserToken, twitterController.UpdateStatus);
+
+    app.route("/twitter/trends/france")
+        .get(jwtMiddleware.VerifyUserToken, twitterController.GetFranceTrend);
 };
