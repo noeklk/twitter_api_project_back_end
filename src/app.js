@@ -42,7 +42,7 @@ userRoute(app);
 keywordRoute(app);
 
 // Cron qui save toute les tendances dans la db toutes les 30 secondes
-// trendsCron();
+trendsCron();
 
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
 app.use((req, res, next) => {

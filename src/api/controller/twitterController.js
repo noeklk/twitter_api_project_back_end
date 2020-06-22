@@ -51,7 +51,6 @@ exports.GetKeywordTrendByCountry = (req, res) => {
 };
 
 exports.GetFranceTrend = (req, res) => {
-    console.log(1);
     const twit = twitClientHelper.GenerateTwitClient(req);
 
     try {
