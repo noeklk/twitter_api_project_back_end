@@ -10,10 +10,6 @@ const keywordSchema = new Schema({
         type: Number,
         required: true
     },
-    id_user: {
-        type: String,
-        required: "Le keyword doit provenir d'un utilisateur"
-    },
     created_at: {
         type: Date,
         default: Date.now
