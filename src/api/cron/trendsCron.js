@@ -21,7 +21,7 @@ module.exports = () => {
                         keywordRepository.CreateKeyword(trendTweet.name, trendTweet.tweet_volume);
                     }
                 } else {
-                    console.log("error");
+                    console.log(err);
                 }
             });
         } catch (error) {
