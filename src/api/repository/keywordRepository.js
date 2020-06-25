@@ -7,12 +7,9 @@ exports.CreateKeyword = (keyword, tweets_number) => {
             tweets_number
         });
 
-        new_keyword.save((error, keyword) => {
-            if (!error && keyword) {
-                console.log("Saved with success")
-
-            } else {
-                console.log(error);
+        new_keyword.save((error, data) => {
+            if (error) {
+                console.log(`le keyword: ${keyword} avec comme volume: ${tweets_number} n'est pas rentré en base de donnée`)
             }
         })
     } catch (e) {

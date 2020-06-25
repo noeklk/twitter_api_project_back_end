@@ -10,6 +10,7 @@ module.exports = () => {
         try {
             twit.get("trends/place", { id: "23424819" }, (err, data) => {
                 if (!err) {
+                    let validCount = 0;
                     for (let i = 0; i < data[0].trends.length; i++) {
                         let trendTweet = data[0].trends[i];
 
@@ -18,10 +19,17 @@ module.exports = () => {
                             continue;
                         }
 
-                        keywordRepository.CreateKeyword(trendTweet.name, trendTweet.tweet_volume);
+                        try {
+                            keywordRepository.CreateKeyword(trendTweet.name, trendTweet.tweet_volume);
+                            validCount++;
+                        } catch (error) {
+                            continue;
+                        }
                     }
+
+                    console.log("Success :", `${validCount} tendances ont été insérées en base de donnée !`)
                 } else {
-                    console.log("error");
+                    console.log(err);
                 }
             });
         } catch (error) {

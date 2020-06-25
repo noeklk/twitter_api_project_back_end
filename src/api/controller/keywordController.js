@@ -1,13 +1,17 @@
 const Keyword = require("../model/keywordModel");
+const keywordHelper = require("../helper/keywordHelper");
 
 const config = require("../../config");
 const { errorMessage } = config;
 
+
 exports.GetAllKeywordsByKeyword = (req, res) => {
     try {
-        let keyword = req.params.keyword
+        let keyword = req.params.keyword;
+        const filterKey = req.query.filter ? req.query.filter : "";
+        let pipeline = keywordHelper.GetPipeline(filterKey, keyword);
 
-        Keyword.find({ keyword }, (error, data) => {
+        Keyword.aggregate(pipeline, (error, data) => {
             if (!error) {
                 res.status(200);
                 res.json(data);
@@ -17,9 +21,7 @@ exports.GetAllKeywordsByKeyword = (req, res) => {
                 console.log(error);
                 res.json({ message: "Aucun mot trouvé" });
             }
-        })
-
-        // res.json({keyword_id});
+        });
     } catch (e) {
         res.status(500);
         console.log(e);
@@ -42,8 +44,6 @@ exports.GetAKeywordById = (req, res) => {
                 res.json({ message: "Aucun mot trouvé" });
             }
         })
-
-        // res.json({keyword_id});
     } catch (e) {
         res.status(500);
         console.log(e);
@@ -67,8 +67,6 @@ exports.UpdateAKeywordById = (req, res) => {
                 res.json({ message: "Aucun mot trouvé" });
             }
         })
-
-        // res.json({keyword_id});
     } catch (e) {
         res.status(500);
         console.log(e);
@@ -91,8 +89,6 @@ exports.DeleteAKeywordById = (req, res) => {
                 res.json({ message: "Aucun mot trouvé" });
             }
         })
-
-        // res.json({keyword_id});
     } catch (e) {
         res.status(500);
         console.log(e);
