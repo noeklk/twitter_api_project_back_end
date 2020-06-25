@@ -8,7 +8,7 @@ const { errorMessage } = config;
 exports.GetAllKeywordsByKeyword = (req, res) => {
     try {
         let keyword = req.params.keyword;
-        const filterKey = req.params.filter ? req.params.filter : "";
+        const filterKey = req.query.filter ? req.query.filter : "";
         let pipeline = keywordHelper.GetPipeline(filterKey, keyword);
 
         Keyword.aggregate(pipeline, (error, data) => {
