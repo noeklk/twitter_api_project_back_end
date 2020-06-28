@@ -31,9 +31,10 @@ or
 #### Environment variables :
 Rename the .env.sample file to .env and insert your values
 
-You can get your twitter_consumer_key and twitter_consumer_secret here 
-In the [Details] of your applications u will be able to get in the [keys and tokens] tab both of your keys
-[Twitter Applications](https://developer.twitter.com/en/apps/)
+### You can get your twitter_consumer_key and twitter_consumer_secret here [Twitter Applications](https://developer.twitter.com/en/apps/)
+In the [Details] of your applications you will be able to get in the [keys and tokens] tab and get both of your keys
+- twitter_consumer_key: API key
+- twitter_consumer_secret: API secret key
 
 ```
 USER_JWT_KEY=XXX (Anything that is unique)
